@@ -2,7 +2,7 @@
 
 ## Fork ##
 
-- 点击右上角的Fork按钮
+- 进入[项目](https://github.com/GY-SingularTeam/HelloWorld)点击右上角的Fork按钮
     
 ## Pull request ##
 
@@ -18,7 +18,7 @@
 
 ## Merge #
 
-- 进入项目Pull request
+- 进入项目[Pull-requests](https://github.com/GY-SingularTeam/HelloWorld/pulls)
 
 - 选择待审核Pull requset
 
