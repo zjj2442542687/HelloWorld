@@ -1,0 +1,16 @@
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) {
+	Scanner sr=new Scanner(System.in );
+    int n=sr.nextInt();
+    int a=1,b=1,c=2;
+    while(n>3){
+    	a=b;b=c;c=(a+b)%10007;
+    	n--;
+    }
+    if(n==1||n==2)System.out.println(1);
+    else System.out.println(c);
+	sr.close();
+	}
+}
