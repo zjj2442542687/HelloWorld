@@ -12,7 +12,7 @@
 
 - Upload files上传或Create new file建立自己的作业代码文件
 
-- 最后，New pull request提交作业，等待管理员审核
+- 最后，New pull request -> Create pull request提交作业，等待管理员审核
 
 # 如何审核 #
 
