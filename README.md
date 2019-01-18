@@ -8,7 +8,7 @@
 
 - 转到Your repositories的同名Repository中
 
-- 进入以日期命名的文件夹
+- 创建属于自己的文件夹
 
 - Upload files上传或Create new file建立自己的作业代码文件
 
