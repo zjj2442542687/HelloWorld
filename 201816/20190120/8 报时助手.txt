@@ -1,0 +1,25 @@
+import java.util.*;
+public class Main{
+static String a[]={"zero","one","two","three","four",
+			   "five","six","seven","eight","nine",
+			 "ten","eleven","twelve","thir","four",
+		"fif","six","seven","eigh","nine","twenty"};
+    public static void fun(int n){
+    	if(n<=12||n==20)System.out.print(a[n]+" ");
+    	else if(n<20)System.out.print(a[n]+"teen"+" ");
+    	else {
+    		if(n<30)System.out.print(a[n-n%10]+" ");
+    		else System.out.print(a[n/10+10]+"ty"+" ");
+    		if(n%10!=0)System.out.print(a[n%10]+" ");
+    	}
+    } 
+	public static void main(String[] args) {
+     Scanner sc=new Scanner (System.in);
+     int n=sc.nextInt();
+     int m=sc.nextInt();
+        fun(n);
+    	if(m==0){
+    	System.out.println("o'clock");
+     }
+     else fun(m);
+	}}
