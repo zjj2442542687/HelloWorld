@@ -1,0 +1,32 @@
+import java.util.*;
+public class  Main{
+	public static void main(String[] args) {
+    Scanner sc=new Scanner (System.in);
+    char a[]=sc.next().toCharArray();
+    char b[]=sc.next().toCharArray();
+    int lena=a.length,lenb=b.length;
+    int x;
+    if(lena>lenb)x=lena;
+    else x=lenb;
+    int c[]=new int[x+1];
+    int y=0;
+    for(int i=0;i<=x;i++)
+    {
+    int n=0,m=0;
+    if(lena>0)n=a[--lena]-'0';
+    else n=0;
+    if(lenb>0)m=b[--lenb]-'0';
+    else m=0;
+    c[i]=n+m+y;
+	y=c[i]/10;
+	c[i]=c[i]%10;
+    }
+    for(int i=x,f=0;i>=0;i--)
+    {
+     if(c[i]!=0)f=1;
+     if(f==1) {
+     System.out.print(c[i]);
+     }
+    }
+	}
+}
