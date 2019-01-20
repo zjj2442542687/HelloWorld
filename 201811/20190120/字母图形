@@ -1,0 +1,41 @@
+/*
+ * 利用字母可以组成一些美丽的图形，下面给出了一个例子：
+ABCDEFG
+BABCDEF
+CBABCDE
+DCBABCD
+EDCBABC
+这是一个5行7列的图形，请找出这个图形的规律，并输出一个n行m列的图形。
+*/
+package Algorithm;
+
+import java.util.Scanner;
+
+public class Example4 {
+	public static void main(String [] args){
+		Scanner sr = new Scanner(System.in);
+		
+		int n = sr.nextInt(),m = sr.nextInt();
+		char ch = 'A';
+		char [] ch2 = new char [m];
+		for(int i = 0;i < n;i++){
+			if(i == 0){
+				for(int j = 0; j<m; j++)
+					ch2[j] = (char)(ch +j);
+				for(int z = 0;z < m; z++)
+					System.out.print(ch2[z]);
+				System.out.println();
+			}
+			else{
+				ch =(char)(ch2[0] + 1);
+				for(int k = m-1;k > 0;k--)
+					ch2[k] = ch2[k-1];
+				ch2[0] = ch;
+				for(int k = 0;k < m;k++)
+					System.out.print(ch2[k]);
+				System.out.println();
+			}
+		}
+	sr.close();
+	}
+}
