@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+	public static ArrayList<city>[] map;
+	public static int max = Integer.MIN_VALUE;
+	public static int count = 1;
+
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		int n = sr.nextInt();
+		map = new ArrayList[n + 1];
+		for (int i = 1; i <= n; i++)
+			map[i] = new ArrayList<city>();
+		for (int i = 1; i < n; i++) {
+			int P = sr.nextInt();
+			int Q = sr.nextInt();
+			int D = sr.nextInt();
+			map[P].add(new city(P, Q, D));
+			map[Q].add(new city(Q, P, D));
+		}
+		fun();
+		sr.close();
+
+	}
+
+	public static void fun() {
+		boolean[] bool = new boolean[map.length];
+		dfs(1, bool, 0);
+		bool = new boolean[map.length];
+		dfs(count, bool, 0);
+		int sum = 10 * max + max * (max + 1) / 2;
+
+		System.out.println(sum);
+
+	}
+
+	public static void dfs(int start, boolean[] bool, int c) {
+		bool[start] = true;
+		for (int i = 0; i < map[start].size(); i++) {
+			city t = map[start].get(i);
+			if (!bool[t.Q]) {
+				bool[t.Q] = true;
+				if (c + t.D > max) {
+					max = c + t.D;
+					count = t.Q;
+				}
+				dfs(t.Q, bool, c + t.D);
+				bool[t.Q] = false;
+
+			}
+		}
+
+	}
+
+}
+
+class city {
+	int P, Q, D;
+
+	public city(int p, int q, int d) {
+		super();
+		P = p;
+		Q = q;
+		D = d;
+	}
+}
