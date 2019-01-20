@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+          Scanner lnt=new Scanner(System.in);
+          ArrayList<Integer> list=new ArrayList<Integer>();
+          int n=lnt.nextInt();
+          int sum=0;
+          for(int i=0;i<5;i++) {
+        	  int t=lnt.nextInt();
+        	  list.add(t);
+          }
+          Collections.sort(list);
+        while(list.size()>=2) {
+        	int t=0;
+        	t=list.get(1)+list.get(0);
+        	sum+=t;
+        	list.remove(0);
+        	list.remove(0);
+        	list.add(t);
+        	Collections.sort(list);
+        }
+        System.out.println(sum);
+	}
+
+}
