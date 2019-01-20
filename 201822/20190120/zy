@@ -1,0 +1,27 @@
+//package hanjiazhoye;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+public static void main(String[] args) {
+	Scanner sr=new Scanner(System.in );
+	int v=sr.nextInt();
+	int n=sr.nextInt();
+	int a[]=new int [n];
+	int i=0,sum=0;
+	for(;i<n;i++){
+		a[i]=sr.nextInt();
+	}
+	i=0;
+	Arrays.sort(a);
+	if(v<a[i])System.out.println(0);
+	else 
+		do{
+		v=v-a[i];i++;
+		sum++;
+	}while(v>=0);
+	System.out.println(sum-1);
+	sr.close();
+}
+}
