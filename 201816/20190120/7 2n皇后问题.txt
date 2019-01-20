@@ -1,0 +1,71 @@
+import java.util.*;
+public class Main{
+    static int a[][],n,sum=0;
+    public static void fun1(int i,int m)
+    {
+    	if(m==n) {
+    		sum++;
+    		return;
+    	}
+    	else {
+    	for(int x=0;x<n;x++)
+    	{
+    		if(a[i][x]==1){
+    			int f=0;
+    			for(int j=i-1;j>=0;j--)
+    				if(a[j][x]==3)f=1;
+    			if(f==1)continue;
+    			for(int j=i-1,g=1;j>=0&&g+x<n;j--,g++)
+    				if(a[j][x+g]==3)f=1;
+    			if(f==1)continue;
+    			for(int j=i-1,g=x-1;j>=0&&g>=0;j--,g--)
+    				if(a[j][g]==3)f=1;
+    			if(f==1)continue;
+    			a[i][x]=3;
+    			fun1(i+1,m+1);
+    			a[i][x]=1;
+    			}
+    	}
+ }	
+    }
+    public static void fun(int i,int m)
+    {
+    	if(m==n) {
+    		fun1(0,0);
+    		return;
+    	}
+    	else {
+    	for(int x=0;x<n;x++)
+    	{
+    		if(a[i][x]==1) {
+    			if(i!=0) {
+    			int f=0;
+    			for(int j=i-1;j>=0;j--)
+    				if(a[j][x]==2)f=1;
+    			if(f==1)continue;
+    			for(int j=i-1,g=1;j>=0&&g+x<n;j--,g++)
+    				if(a[j][x+g]==2)f=1;
+    			if(f==1)continue;
+    			for(int j=i-1,g=x-1;j>=0&&g>=0;j--,g--)
+    				if(a[j][g]==2)f=1;
+    			if(f==1)continue;
+    			}
+    			a[i][x]=2;
+    			
+    			fun(i+1,m+1);
+    			a[i][x]=1;
+    			}
+    	}
+     }
+  }
+    public static void main(String[] args) {
+    Scanner sc=new Scanner(System.in);
+    n=sc.nextInt();
+    a=new int [n][n];
+	for(int i=0;i<n;i++)
+		for(int j=0;j<n;j++)
+		a[i][j]=sc.nextInt();
+	    fun(0,0);
+	System.out.println(sum);
+    }
+}
