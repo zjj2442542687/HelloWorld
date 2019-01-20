@@ -1,0 +1,29 @@
+import java.util.*;
+public class Main {
+
+	public static void main(String[] args) {
+    Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int a[]=new int [n*3];
+		a[0]=1;
+		for(int x=1;x<=n;x++)
+		{
+		int y=0;
+		for(int i=0;i<n*3;i++)
+	     	{
+			a[i]=(a[i]*x)+y;
+			
+			y=a[i]/10;
+	     	a[i]=a[i]%10;
+	     	}
+		}
+		for(int i=n*3-1,f=0;i>=0;i--)
+	     {
+	      if(a[i]!=0)f=1;
+	      if(f==1) {
+	      System.out.print(a[i]);
+	      }
+	     }
+		System.out.println();
+ }
+}
