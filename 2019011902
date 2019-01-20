@@ -1,0 +1,37 @@
+import java.util.*;
+import java.math.*;
+import java.io.*;
+public class Main {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        Scanner in =new Scanner(System.in);
+        int n,m;
+        while(in.hasNext())
+        {
+            n=in.nextInt();
+            m=in.nextInt();
+            int sum=0;
+            int j=0;
+            int count=0;
+            for(int i=1;i<=n;i++)
+            {
+                j=j+2;
+                sum=sum+j;
+                count++;
+                if(i==n)
+                {
+                    System.out.println(sum/count);
+                }
+                else if(count==m)
+                {
+                    
+                        System.out.printf("%d ",sum/m);
+                        sum=0;
+                        count=0;
+                }
+            }
+        }
+    }
+
+}
