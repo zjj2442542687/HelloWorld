@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<math.h>
+float max(float a,float b)
+{
+	return a>b?a:b;
+}
+float min(float a,float b)
+{
+	return a<b?a:b;
+}
+int main()
+{
+	float xa1,ya1,xa2,ya2,wa,ha,xa3,ya3,x1,y1,x2,y2;
+	float xb1,yb1,xb2,yb2,wb,hb,xb3,yb3;
+	scanf("%f%f%f%f%f%f%f%f",&xa1,&ya1,&xa2,&ya2,&xb1,&yb1,&xb2,&yb2); 
+	wa=fabs(xa1-xa2),ha=fabs(ya1-ya2);
+	wb=fabs(xb1-xb2),hb=fabs(yb1-yb2);
+	xa3=(xa1+xa2)/2,ya3=(ya1+ya2)/2;
+	xb3=(xb1+xb2)/2,yb3=(yb1+yb2)/2;
+	if(fabs(xa3-xb3)<=wa/2+wb/2&&fabs(ya3-yb3)<=ha/2+hb/2)
+	{
+		x1=max(xa1,xb1);
+		y1=max(ya1,yb1);
+		x2=min(xa2,xb2);
+		y2=min(ya2,yb2);
+		printf("%.2f",fabs(x1-x2)*fabs(y1-y2));
+	}
+	else
+	{
+		printf("0.00");
+	}
+	return 0;
+}
