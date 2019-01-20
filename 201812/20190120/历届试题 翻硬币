@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		char[] t1 = sr.nextLine().toCharArray();
+		char[] t2 = sr.nextLine().toCharArray();
+		sr.close();
+		int t = -1;
+		int sum = 0;
+		for (int i = 0; i < t1.length; i++) {
+			if (t1[i] != t2[i])
+				if (t != -1) {
+					sum += i - t;
+					t = -1;
+				} else {
+					t = i;
+				}
+		}
+		System.out.println(sum);
+
+	}
+
+}
