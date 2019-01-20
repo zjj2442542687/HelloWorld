@@ -1,0 +1,17 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+        Scanner lnt=new Scanner(System.in);
+        int n=lnt.nextInt();
+        BigInteger sum=new BigInteger("1");
+        for(int i=1;i<=n;i++) {
+        	BigInteger j=new BigInteger(i+"");
+        	sum=sum.multiply(j);
+        }
+        System.out.println(sum);
+	}
+
+}
