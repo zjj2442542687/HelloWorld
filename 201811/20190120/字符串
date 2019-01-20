@@ -1,0 +1,31 @@
+/*
+ * 对于长度为5位的一个01串，每一位都可能是0或1，一共有32种可能。它们的前几个是：
+00000
+00001
+00010
+00011
+00100
+请按从小到大的顺序输出这32种01串。
+ * */
+
+public class Main {
+	public static void main(String [] args){
+		char [] ch = new char [5];
+		
+		for(int i = 0;i < 5;i++)
+			ch[i] = '0';
+		/*从最后开始加起，最后一个数加1
+		 * 如果后面的数为2，前面的数就加1,后面的数-2.
+		 */
+		for(int i = 0;i < 31;i++){
+				ch[4] =(char)(ch[4] + 1);
+					for(int j = 3;j >= 0 && ch[j+1] == '2'; j--){
+							ch[j] = (char)(ch[j] + 1);
+							ch[j+1] = (char)(ch[j+1] - 2);
+						}
+					for(int z = 0;z < 5;z++)
+						System.out.print(ch[z]);
+					System.out.println();
+			}
+	}
+}
