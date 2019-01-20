@@ -1,0 +1,70 @@
+//高精度加法
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char a[200],b[200];
+	int c[500];
+	scanf("%s%s",a,b);
+	int i,j,k=0,r=0;
+	int lena,lenb;
+	lena=strlen(a);
+	lenb=strlen(b);
+	for(i=lena-1,j=lenb-1;i>=0&&j>=0;i--,j--)
+	{
+		int p=(a[i]-'0')+(b[j]-'0')+r;
+		c[k++]=p%10;
+		r=p/10;
+	}
+	while(i>=0)
+	{
+		int p=(a[i]-'0')+r;
+		c[k++]=p%10;
+		r=p/10;
+		i--;
+	}
+	while(j>=0)
+	{
+		int p=(b[j]-'0')+r;
+		c[k++]=p%10;
+		r=p/10;
+		j--;
+	}
+	if(r)
+	{
+		c[k++]=r;
+	}
+    for (int j = k-1; j >= 0; j--)
+        printf("%d", c[j]);
+	return 0;
+}
+
+//核桃的数量
+#include<stdio.h>
+int main()
+{
+	int a,b,c,i;
+	scanf("%d%d%d",&a,&b,&c);
+	for(i=1;;i++)
+	{
+		if(i%a==0&&i%b==0&&i%c==0)
+		{
+			printf("%d",i);
+			break;
+		}
+	}
+	return 0;
+} 
+
+//时间转换
+#include<stdio.h>
+int main()
+{
+	int t,a=0,b=0,c=0;
+	scanf("%d",&t);
+	a=t/3600;
+	b=(t-a*3600)/60;
+	c=t-a*3600-b*60;
+	printf("%d:%d:%d",a,b,c);
+	return 0;
+ } 
