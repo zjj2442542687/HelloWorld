@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+	    Scanner lnt =new Scanner(System.in);
+	    int a,b,c;
+	    a=lnt.nextInt();
+	    b=lnt.nextInt();
+	    c=lnt.nextInt();
+	    int d=Gb(a,b);
+	    int e=Gb(d,c);
+	    System.out.println(e);
+	}
+	public static int Gb(int a,int b) {
+		int gb,gy;
+		int t;
+		gb=a*b;
+		while(b!=0) {
+			t=a%b;
+			a=b;
+			b=t;
+		}
+		gy=a;
+		gb=gb/gy;
+		return gb;
+	}
+}
+ 
