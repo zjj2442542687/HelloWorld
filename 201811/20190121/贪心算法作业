@@ -1,0 +1,98 @@
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+/*
+ * 有n个宝物，，每个宝物有相应的质量m和价值v，且宝物可以分割。
+ * 由于船的船载量（p）有限，如何运走价值（t）最多的宝物 
+第一行输入n，p
+第二行及以下分别输入m，v
+输出 t
+例：
+输入
+6 19
+    2 8
+    6 1
+    7 9
+    4 3
+    10 2
+    3 4
+输出 
+    24.6
+
+ * */
+class date{
+	int m,v;
+}
+public class Main {
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		
+		//宝特数量
+		int n = sr.nextInt();
+		//船载量
+		int p = sr.nextInt();
+		
+		//最大价值
+		double val = 0,weight = 0;
+		List<date> list = new ArrayList<date>();
+		
+		for(int i = 0; i < n; i++){
+			date d1 = new date();
+			
+			d1.m = sr.nextInt();
+			d1.v = sr.nextInt();
+			
+			list.add(d1);
+		}
+		
+		Collections.sort(list,new Comparator<Object>() {
+
+			@Override
+			public int compare(Object arg0, Object arg1) {
+				date d1 = (date)arg0;
+				date d2 = (date)arg1;
+				
+				
+				if(d1.v < d2.v)
+					return 1;
+				
+				if(d1.v > d2.v)
+					return -1;
+				
+				if(d1.v == d2.v)
+					return d1.m < d2.m ? 1 : -1;
+				return 0;
+			}
+			
+		});
+		
+		for(int i = 0; i < n; i++){
+			//如果宝物的重量小于船能承受的重量，直接载上去就可，
+			//反之就要分割
+			if((weight + list.get(i).m) <= p){
+				weight += list.get(i).m;
+				
+				val += list.get(i).v;
+			}else{
+				//这个宝物一定是装不下了，要分割下来安装，再可以到达最大价值
+				//该宝物每单位的价值
+				double temp = list.get(i).v / (double)list.get(i).m;
+				
+				//船还可以装多少量
+				double weightTemp = p - weight;
+				
+				val += weightTemp * temp;
+				
+				break;
+			}
+		}
+		
+		System.out.println(val);
+		
+		sr.close();
+	}
+}
