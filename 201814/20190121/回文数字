@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{
+	int n,flag=0,i=10000;
+	scanf("%d",&n);
+	for(i;i<1000000;i++)
+	{
+		int t=i,sum=0,s=0;
+		while(t>0)
+		{
+			s=s*10+t%10;
+			sum+=t%10;
+			t/=10;
+		}
+		if(s==i&&n==sum)
+		{
+			flag=1;
+			printf("%d\n",i);
+		}
+	}
+	if(flag==0)
+	{
+		printf("-1\n");
+	}
+	return 0;
+}
