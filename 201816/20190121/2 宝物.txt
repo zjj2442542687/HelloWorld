@@ -1,0 +1,35 @@
+import java.util.*;
+public class Main{
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		float p=sc.nextInt();
+		float a[][]=new float[n][2];
+		float b[]=new float[2];
+		for(int i=0;i<n;i++)
+		for(int j=0;j<2;j++)
+		a[i][j]=sc.nextInt();
+		for(int i=0;i<n-1;i++)
+			for(int j=i+1;j<n;j++)
+			{
+	        if((a[i][1]/a[i][0])<(a[j][1]/a[j][0])) {
+	        b[0]=a[i][0];b[1]=a[i][1];
+	        a[i][0]=a[j][0];a[i][1]=a[j][1];
+	        a[j][0]=b[0];a[j][1]=b[1];
+	        }
+			}
+	   float sum=0,s=0;
+	for(int i=0;i<n;i++)
+	{
+		if(s>=p)break;
+		else {
+			if(s+a[i][0]>p) {
+				sum+=(float)(a[i][1]/a[i][0])*(p-s);
+			}
+			else sum+=a[i][1];
+			s+=a[i][0];
+		}
+	}
+		System.out.println(sum);
+	}
+}
