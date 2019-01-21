@@ -1,0 +1,66 @@
+#include<stdio.h>
+int n,p;
+int w[1000];
+float a[1000];//重量 
+float b[1000];//价值 
+float sum[1000];//价值之和
+int o;
+void fun(int k,float c[1000],float d[1000])
+{
+	float t=0,f;
+	if(k==n)
+	{
+		for(int i=0;i<n;i++)
+		{
+			if(t+a[i]>p)
+			{
+				f=p-t;
+				sum[o]+=(f/a[i])*b[i];
+				break;
+			}
+			else
+			{
+				t+=a[i];
+				sum[o]+=b[i];
+			}
+		}
+		o++;
+		return;
+	}
+	else
+	{
+		for(int i=0;i<n;i++)
+		{
+			if(w[i]==0)
+			{
+				a[k]=c[i];
+				b[k]=d[i];
+			//	k++;
+				w[i]=1;
+				fun(k+1,c,d);
+			//	k--;
+				w[i]=0;
+			}
+		 } 
+		 return;
+	}
+ } 
+int main()
+{
+	float c[1000],d[1000],max;
+	scanf("%d%d",&n,&p);
+	for(int i=0;i<n;i++)
+	{
+		scanf("%f%f",&c[i],&d[i]);
+	}
+	fun(0,c,d);
+	max=sum[0];
+	for(int i=1;i<o;i++)
+	{
+		if(sum[i]>max)
+		{
+			max=sum[i];
+		}
+	}
+	printf("%.1f",max);
+ } 
