@@ -1,0 +1,29 @@
+package zuowei;
+
+import java.util.Scanner;
+
+import com.sun.deploy.util.SystemPropertyUtil;
+
+public class shudehuafeng {
+	static int n,m;
+	static int sum=0;
+	
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		
+		n=sc.nextInt();
+		m=sc.nextInt();
+		fun(1,1,n);
+		System.out.println(sum);
+	}
+	private static void fun(int i, int j, int n) {
+		if(i==m)
+		{
+			sum++;
+		}
+		else
+			for(int k=j;k<=n/(m+1-i);k++)
+				fun(i+1,k,n-k);
+	}
+
+}
