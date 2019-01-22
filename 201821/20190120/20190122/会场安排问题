@@ -1,0 +1,38 @@
+#include<stdio.h>
+typedef struct node
+{
+	int kaishi;
+	int jieshu;
+}node;
+int main()
+{
+	int n,sum=1,jieshu;
+	node x,nx[999];
+	scanf("%d",&n);
+	for(int i=0;i<n;i++)
+	{
+		scanf("%d%d",&nx[i].kaishi,&nx[i].jieshu);
+	}
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=0;j<n-1-i;j++)
+		{
+			if(nx[j].jieshu>nx[j+1].jieshu)
+			{
+				x=nx[j];
+				nx[j]=nx[j+1];
+				nx[j+1]=x;
+			}
+		}
+	}
+	jieshu=nx[0].jieshu;
+	for(int i=1;i<n;i++)
+	{
+		if(nx[i].kaishi>=jieshu)
+		{
+			jieshu=nx[i].jieshu;
+			sum++;
+		}
+	}
+	printf("%d",sum);
+}
