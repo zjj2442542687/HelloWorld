@@ -1,0 +1,39 @@
+#include<stdio.h>
+int an(int n)
+{
+	for(int i=1;i<=n;i++)
+	{
+		printf("sin(%d",i);
+		if(i%2!=0&&i!=n)
+			printf("-");
+		if(i%2==0&&i!=n)
+			printf("+");
+	}
+	for(int i=0;i<n;i++)
+	{
+		printf(")");
+	}
+}
+int sn(int n)
+{
+	int s=n;
+	for(int i=0;i<n-1;i++)
+	{
+		printf("(");
+	}
+	for(int i=1;i<=n;i++)
+	{
+		an(i);
+		printf("+%d",s);
+		if(s!=1)
+			printf(")");
+		s--;
+	}
+}
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	sn(n);
+	return 0;
+ } 
