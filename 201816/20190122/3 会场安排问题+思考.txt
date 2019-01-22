@@ -1,0 +1,50 @@
+#include<stdio.h>
+struct node{
+   int aa;
+   int bb;
+   int cc;
+};
+int main()
+{
+   int n,s=0,sum=0;
+   scanf("%d",&n);
+   struct node a[n],b,s1[n],sum1[n];
+   for(int i=0;i<n;i++)
+   {
+    scanf("%d%d",&a[i].aa,&a[i].bb);
+    a[i].cc=i+1;
+   }
+   for(int i=0;i<n-1;i++)
+   {
+   for(int j=i+1;j<n;j++)
+    if((a[i].aa>a[j].aa)||(a[i].aa==a[j].aa&&a[i].bb>a[j].bb))
+    {
+	 b=a[i];a[i]=a[j];a[j]=b;
+	}
+   }
+   for(int i=0;i<n-1;i++)
+   {s=0;
+   for(int j=i;j<n;j++)
+   {
+   if(j==i)s1[s++]=a[j];
+     else{
+	 if(s1[s-1].bb<=a[j].aa)s1[s++]=a[j];
+	 }
+   }
+   if(sum<s){sum=s;
+   for(int j=0;j<s;j++)
+   sum1[j]=s1[j];
+   }
+   }
+   for(int i=0;i<sum-1;i++)
+   {
+   for(int j=i+1;j<sum;j++)
+    if(sum1[i].cc>sum1[j].cc)
+    {
+	 b=sum1[i];sum1[i]=sum1[j];sum1[j]=b;
+	}
+   }
+    printf("%d\n",sum);
+    for(int i=0;i<sum;i++)
+    printf("%d %d\n",sum1[i].aa,sum1[i].bb);
+}
