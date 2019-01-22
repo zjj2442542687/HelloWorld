@@ -1,0 +1,44 @@
+//package hanjiazhoye;
+
+import java.util.Scanner;
+public class Main {
+public static void main(String[] args) {
+	Scanner sr=new Scanner(System.in );
+		int m=sr.nextInt();
+		int a[][]=new int [m][2];
+		for(int i=0;i<m;i++){
+			a[i][0]=sr.nextInt();
+			a[i][1]=sr.nextInt();
+		}
+		for(int i=0;i<m;i++){
+			for(int j=0;j<m-1-i;j++){
+				if(a[j][1]>=a[j+1][1]){
+					if(a[j][1]==a[j+1][1]){
+						if(a[j][0]<a[j+1][0]){
+							int b[]=a[j];
+							a[j]=a[j+1];
+							a[j+1]=b;
+						}
+					}
+					else {
+						int b[]=a[j];
+						a[j]=a[j+1];
+						a[j+1]=b;
+					}
+				}
+			}
+		}
+		int s=1;
+		int end=a[0][1];
+		for(int i=1;i<m;i++){
+			if(a[i][0]>end){
+				s++;
+				end=a[i][1];
+			}
+			
+		}
+		System.out.println(s);
+	
+	sr.close();
+}
+}
