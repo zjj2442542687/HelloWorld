@@ -1,0 +1,60 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+	static class Time{
+		int bi;  //起始时间
+		int ei;  //结束时间
+		public Time(int bi, int ei) {
+			super();
+			this.bi = bi;
+			this.ei = ei;
+		}
+		
+	}
+	public static void main(String[] args) {
+        Scanner lnt=new Scanner(System.in);
+        int m=lnt.nextInt();
+        for(int i=0;i<m;i++) {
+        	int n=lnt.nextInt();
+        	int count=0;
+        	List<Time> list=new ArrayList<Time>();  //创建集合
+        	for(int j=0;j<n;j++) {    //输入
+        		int x=lnt.nextInt();   //起始时间
+        		int y=lnt.nextInt();   //结束时间
+        		Time a=new Time(x,y);  //创建一个集合元素
+        		list.add(a);    //添加到集合
+        	}
+        	Collections.sort(list,new Comparator<Time>() {
+        		public int compare(Time o1, Time o2) {
+    				return o1.ei-o2.ei;
+    			}
+    		});
+        	int j=0;
+        	Time x=list.get(j),y;
+        	while(j<list.size()) {
+        		if(j==0) {
+        			count++;
+        			j++;
+        		}
+        		else {
+        		     y=list.get(j);   //下一个活动
+        			if(y.bi<=x.ei) {
+        				j++;
+        				}
+        			else {
+        				x=list.get(j);
+        				   count++;
+        				j++;
+        			}
+        		}
+        	}
+        	System.out.println(count);
+        }
+	}
+
+}
