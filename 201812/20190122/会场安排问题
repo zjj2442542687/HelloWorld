@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+			int n = sr.nextInt();
+			ArrayList<meeting> list = new ArrayList<meeting>();
+			for (int j = 0; j < n; j++)
+				list.add(new meeting(sr.nextInt(), sr.nextInt()));
+			Collections.sort(list, new Comparator<meeting>() {
+
+				@Override
+				public int compare(meeting o1, meeting o2) {
+					return o1.end - o2.end;
+				}
+			});
+			int count = 1;
+			int end = list.get(0).end;
+			for (int j = 1; j < list.size(); j++) {
+				if (list.get(j).start > end) {
+					count++;
+					end = list.get(j).end;
+				}
+
+			}
+			System.out.println(count);
+
+		sr.close();
+	}
+}
+
+class meeting {
+	int start;
+	int end;
+
+	public meeting(int start, int end) {
+		this.start = start;
+		this.end = end;
+	}
+
+}
