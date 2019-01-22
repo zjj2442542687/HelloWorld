@@ -1,0 +1,44 @@
+#include<stdio.h>
+int main()
+{
+	int a[100];
+	int n,t,cost=0;
+	scanf("%d",&n);
+	for(int i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=0;j<n-1-i;j++)
+		{
+			if(a[j]<a[j+1])
+			{
+				t=a[j+1];
+				a[j+1]=a[j];
+				a[j]=t;
+			 } 
+		}
+	}
+	for(int i=0;n>1;i++)
+	{
+		cost+=a[n-1]+a[n-2];
+		a[n-2]=a[n-1]+a[n-2]; 
+		n--;
+		
+		for(int i=0;i<n-1;i++)
+		{
+			for(int j=0;j<n-1-i;j++)
+			{
+				if(a[j]<a[j+1])
+				{
+					t=a[j+1];
+					a[j+1]=a[j];
+					a[j]=t;
+				}
+			}
+		}
+	}
+	printf("%d",cost);
+	return 0;
+ } 
