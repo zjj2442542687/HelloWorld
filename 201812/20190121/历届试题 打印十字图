@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class Main {
+	public static char[][] map;
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		int n = sr.nextInt() * 4 + 5;
+		sr.close();
+		map = new char[n][n];
+		fun();
+		for (char[] i : map) {
+			for (char tmp : i)
+				System.out.print(tmp);
+			System.out.println();
+		}
+
+	}
+
+	public static void fun() {
+
+		int m = map.length - 1;
+		int n = map.length / 2;
+		for (int i = 0; i <= n; i++) {
+			if (i == 0)
+				map[0][0] = '.';
+			else if (i % 2 == 1) {
+				for (int j = 0; j <= i; j++)
+					if (j % 2 == 0 && j < i - 1)
+						map[i][j] = '$';
+					else
+						map[i][j] = '.';
+			} else {
+				int j;
+				for (j = 0; j <= i - 3; j++)
+					if (j % 2 == 0)
+						map[i][j] = '$';
+					else
+						map[i][j] = '.';
+				while (j <= i)
+					map[i][j++] = '$';
+
+			}
+			for (int j = 0; j <= i; j++)
+				map[j][i] = map[i][m - j] = map[j][m
+						- i] = map[m - i][j] = map[m - j][i] = map[m - i][m - j] = map[m - j][m - i] = map[i][j];
+		}
+	}
+
+}
