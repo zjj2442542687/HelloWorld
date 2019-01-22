@@ -1,0 +1,59 @@
+#include<stdio.h>
+int main()
+{
+	int i,j,o,p=0,q=0,t,k=0,l=0,x=0;
+	int get[24]={0};
+	int fun[101]={0};
+	int gun[101]={0};
+	int sum[101]={0};
+	int swp[101]={0};
+	int a[24]={0};
+	scanf("%d",&o);
+	int n,m;
+	while(o--)
+	{
+		scanf("%d%d",&n,&m);
+		sum[p++]=n;
+		fun[k++]=m;
+		swp[q++]=m;
+	}
+	for(i=0;i<p;i++)
+	{
+		for(j=0;j<p-i-1;j++)
+		{
+			if(swp[j]>swp[j+1])
+			{
+				t=swp[j];
+				swp[j]=swp[j+1];
+				swp[j+1]=t;
+			}
+		}
+	}
+	for(i=0;i<p;i++)
+	{
+		for(j=0;j<p;j++)
+		{
+			if(swp[i]==fun[j])
+			{
+				gun[i]=j;
+			}
+		}
+	}
+	for(i=0;i<p;i++)
+	{
+		for(j=sum[gun[i]];j<swp[i];j++)
+		{
+			if(get[j]==1) 
+			{
+			   x++;
+			   break;
+			}	
+			else if(get[j]==0)
+			{
+				get[j]=1;
+			}	
+		}
+	}
+	printf("%d",p-x);
+	return 0;
+}
