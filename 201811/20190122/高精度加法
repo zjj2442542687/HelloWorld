@@ -1,0 +1,63 @@
+
+/*
+ * 大数相加，两个无限大的数，相加起来，等于多少?
+ * */
+import java.util.Scanner;
+
+public class Example12 {
+	public  static void main(String [] args){
+		Scanner sr = new Scanner(System.in);
+		
+		char [] ch1 = sr.nextLine().toCharArray();
+		
+		char [] ch2 = sr.nextLine().toCharArray();
+		
+		char [] ch3 = new char [(ch1.length > ch2.length?ch1.length:ch2.length)+1];
+		 
+		int i = 0, j = 0, k = 0;
+		
+		for(char x = '0';i < ch3.length; i++)//全部赋初值'0'
+			ch3[i] = x;	
+		//把ch1和ch2中的数两两相加起来
+		for(i = ch1.length - 1,j = ch2.length - 1,k = ch3.length - 1; i >= 0 && j >= 0; i--,j--,k--){
+			
+			ch3[k] = (char)('0'+ (ch3[k] - '0') + (ch1[i] - '0')+(ch2[j] - '0'));//两个数量相加起来，但相加时ch3也要一起加上，
+																			//因为当ch3[k]的值大于10时，ch3[k-1]的值会改变	
+			//判断相加是否大于10,如果大于10前一个数就加一,当前数减去58
+			if(ch3[k] > '9'){
+					ch3[k-1] = (char)(ch3[k-1] +1);	
+					ch3[k] = (char)(ch3[k] - ':' +'0');
+					}
+				}
+		
+		//当ch1中的数全部加完后，ch2中的数可能没有加完，把ch2中的数再和ch3相加起来
+		if(i < 0 && k >0)
+			while(j >= 0 && k >0){
+				ch3[k] =(char)('0' + (ch3[k] - '0') + (ch2[j] - '0'));
+				if(ch3[k] > '9'){//判断相加是否大于10
+					ch3[k-1] = (char)(ch3[k-1] + 1);
+					ch3[k] = (char)(ch3[k] - ':' +'0');
+					}
+				i--;
+				k--;
+			}
+		else {
+			while(i >= 0 && k > 0){
+				ch3[k] =(char)('0'+ (ch3[k] - '0') + (ch1[i] - '0'));
+				if(ch3[k] > '9'){//判断相加是否大于10
+					ch3[k-1] = (char)(ch3[k-1] + 1);
+					ch3[k] = (char)(ch3[k] - ':' + '0');
+					}
+				i--;
+				k--;
+			}
+		}
+		if(ch3[0] == '0')
+			for(i = 1; i < ch3.length;i++)
+				System.out.print(ch3[i]);
+		else 
+			for(i = 0;i < ch3.length;i++)
+				System.out.print(ch3[i]);
+	sr.close();	
+	}
+	}

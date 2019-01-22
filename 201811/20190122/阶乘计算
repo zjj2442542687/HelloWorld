@@ -1,0 +1,42 @@
+
+import java.util.Scanner;
+
+/*问题描述
+ 输入一个正整数n，输出n!的值。
+ 其中n!=1*2*3*…*n。
+ 算法描述
+ n!可能很大，而计算机能表示的整数范围有限，需要使用高精度计算的方法。使用一个数组A来表示一个大整数a，A[0]表示a的个位，A[1]表示a的十位，依次类推。
+ 将a乘以一个整数k变为将数组A的每一个元素都乘以k，请注意处理相应的进位。
+ 首先将a设为1，然后乘2，乘3，当乘到n时，即得到了n!的值。
+ * */
+public class Main {
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		int n = sr.nextInt();
+		int[] num = new int[100];
+
+		/* *
+		 * 当24 * 5时， 4 * 5 = 20； 20 进两位，temp 保存进的位，将0放入数组[0]中 2 * 5 = 10 10 +
+		 * temp
+		 */
+		int point = 0, temp = 1, j = 0;// point表示有多少位，temp用来保存上一次的进位数
+		for (int i = 1; i <= n; i++) {
+			for (j = 0; j <= point; j++) {
+				num[j] = num[j] * i + temp;
+				temp = num[j] / 10;
+				num[j] = num[j] % 10;
+			}
+			
+			// 看是否需要进位
+			while (temp > 0) {
+				num[j] = temp % 10;
+				temp = num[j] / 10;
+				j++;
+			}
+			point = j - 1;
+		}
+		for (int i = point; i >= 0; i--)
+			System.out.print(num[i]);
+	sr.close();
+	}
+}
