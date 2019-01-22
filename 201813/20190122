@@ -1,0 +1,27 @@
+#include<stdio.h>
+typedef struct TI {
+	int srat,end;
+};
+int main(){
+	int n;
+	TI time[100];
+	scanf("%d",&n);
+	for(int i =0 ; i < n ; i++)
+		scanf("%d%d",&(time[i].srat),&(time[i].end));
+	for(int i =0 ; i < n ; i ++)
+	for(int j = i+1 ; j <n ; j ++  ){
+		if(time[i].end>time[j].end){
+			TI  t = time[i];
+			time [i]= time [j];
+			time [j] = t;
+		}
+	}
+	int str = 0 ,sum = 0; 
+	for(int i =0 ; i < n ;i ++){
+		if(time[i].srat>=str){
+			sum++;
+			str = time[i].end;
+		}
+	}
+	printf("%d",sum);
+}
