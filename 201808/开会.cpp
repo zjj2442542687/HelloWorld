@@ -52,25 +52,20 @@ int main()
 		}
 	}
 	printf("%d\n",max);
-	for(int i=l;i<=l;i++)
+	for(int j=l;j<n;j++)
 	{
-		for(int j=i;j<n;j++)
+		if(j!=l)
 		{
-			if(j!=i)
+			if(a[j].kaishi>=fun)
 			{
-				if(a[j].kaishi>=fun)
-				{
-					b[i]++;
-					fun=a[j].jieshu;
-					printf("%d %d\n",a[j].kaishi,a[j].jieshu);
-				}
-			}
-			else if(j==i)
-			{
-				b[i]++;
 				fun=a[j].jieshu;
 				printf("%d %d\n",a[j].kaishi,a[j].jieshu);
 			}
+		}
+		else if(j==l)
+		{ 
+			fun=a[j].jieshu;
+			printf("%d %d\n",a[j].kaishi,a[j].jieshu);
 		}
 	}
 	return 0;
