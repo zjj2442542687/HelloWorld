@@ -1,0 +1,39 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+typedef struct baowu{//质量m,价值v 
+     int m,v;
+}BABA;
+bool operator<(BABA n1,BABA n2)
+{
+	return double(n1.v)/n1.m>double(n2.v)/n2.m;
+}
+int main()
+{
+	BABA a[1000];
+	int n,p;//n个宝物，p最大重量 
+	int maxp=0;
+	double maxv=0;
+	cin>>n>>p;
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i].m>>a[i].v;
+	}
+	sort(a,a+n);
+	for(int i=0;i<n;i++)
+	{
+		if(maxp+a[i].m<=p)
+		{
+			maxp+=a[i].m;
+			maxv+=a[i].v;
+		}
+		else
+		{
+			maxv+=(p-maxp)*double(a[i].v)/a[i].m;
+			break;
+		}
+	}
+	cout<<maxv;
+	return 0;	
+}
+  
