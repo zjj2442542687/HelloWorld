@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sr = new Scanner(System.in);
+        int n = sr.nextInt();
+        int m = sr.nextInt();
+        @SuppressWarnings("unchecked")
+        ArrayList<point_3371>[] a = new ArrayList[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            a[i] = new ArrayList<point_3371>();
+        }
+        for (int i = 0; i < m; i++) {
+            int u = sr.nextInt();
+            int v = sr.nextInt();
+            int w = sr.nextInt();
+            a[u].add(new point_3371(v, w));
+        }
+        int s = sr.nextInt();
+        sr.close();
+        int[] results = new int[n + 1];
+        bfs(a, results, s);
+        for (int i = 1; i < results.length; i++)
+            System.out.print(results[i] + " ");
+
+    }
+
+    private static void bfs(ArrayList<point_3371>[] a, int[] results, int s) {
+        boolean[] bool = new boolean[a.length];
+        for (int i = 0; i < results.length; i++)
+            results[i] = Integer.MAX_VALUE;
+        results[s] = 0;
+        bool[s] = true;
+        int point = 1;
+        ArrayList<point_3371> list = new ArrayList<point_3371>(a[s]);// 排序
+        Collections.sort(list, new Comparator<point_3371>() {
+
+            @Override
+            public int compare(point_3371 o1, point_3371 o2) {
+                return o1.W - o2.W;
+            }
+        });
+        while (list.size() > 0) {
+            if (point >= a.length - 1)
+                break;
+            point_3371 t = list.get(0);
+            list.remove(0);
+            if (t.W < results[t.G])
+                results[t.G] = t.W;
+            if (!bool[t.G]) {
+                point++;
+                for (point_3371 tmp : a[t.G]) {
+                    if (tmp.W + t.W < results[tmp.G])
+                        list.add(new point_3371(tmp.G, tmp.W + t.W));
+                }
+                bool[t.G] = true;
+                Collections.sort(list, new Comparator<point_3371>() {// 排序
+
+                    @Override
+                    public int compare(point_3371 o1, point_3371 o2) {
+                        return o1.W - o2.W;
+                    }
+                });
+            }
+        }
+    }
+
+}
+
+class point_3371 {
+    int G, W;
+
+    public point_3371(int g, int w) {
+        super();
+        G = g;
+        W = w;
+    }
+}
