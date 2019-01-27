@@ -1,0 +1,51 @@
+package hanjiazhoye;
+
+import java.util.Scanner;
+
+public class a20190127 {
+public static void main(String[] args) {
+	Scanner sr=new Scanner(System.in );
+	int n=sr.nextInt();//顶点
+	int m=sr.nextInt();//边数
+	int a[][]=new int [m][4];
+	int b[]=new int [n];
+	for(int i=0;i<m;i++){
+		for(int j=0;j<3;j++)
+			a[i][j]=sr.nextInt();
+		a[i][3]=1;
+	}
+	int k=sr.nextInt();//源点
+	b[0]=k;
+	int sum=0;
+	int k1=1;
+	while(k1<n){
+		int min=Integer.MAX_VALUE;
+		int flog=0,j=0;
+		for(int i=0;i<m;i++){
+				int l=0;
+				for(;l<k1;l++){
+					if(a[i][0]==b[l]||a[i][1]==b[l])break;
+				}
+				if(l==k1)continue;
+				int m1=0;
+				for(;l<k1;l++){
+					if(a[i][0]==b[l])m1++;
+					if(a[i][1]==b[l])m1++;
+				}
+				if(m1==2)continue;
+			if(a[i][3]==1&&min>a[i][2]){
+				if(a[i][0]==k)flog=a[i][1];
+				else flog=a[i][0];
+				min=a[i][2];
+				j=i;
+			}
+		}
+		a[j][3]=0;
+		sum+=min;
+		k=flog;
+		b[k1++]=flog;
+		}
+	System.out.println(sum);
+	sr.close();
+}
+}
