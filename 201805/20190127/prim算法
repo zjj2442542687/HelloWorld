@@ -1,0 +1,67 @@
+#include<iostream>
+#define INF 99999
+using namespace std;
+int graph[10001][10001],n,m,x1,x2,x3;//n为顶点个数，m为边个数。
+int lowcost[10001],mst[10001];//lowcost[i]表示i到最小树集合的最小的权，mst[i]表示i到最小树集合的最小的权连接的集合的点 
+int sum=0;
+void prim(int n,int st)
+{
+	for(int i=1;i<=n;i++)
+	{
+		lowcost[i]=graph[st][i];
+		mst[i]=st;
+	}
+	mst[st]=0;
+	while(1)
+	{
+		int min=INF,minid=0; 
+		for(int i=1;i<=n;i++)
+		{
+		    if(lowcost[i]<min&&lowcost[i]!=0)
+		    {
+		    	minid=i;
+		    	min=lowcost[i];
+			}
+		}
+		if(min==INF)break;
+		lowcost[minid]=0;
+		mst[minid]=0;
+		sum+=min;
+		for(int i=1;i<=n;i++)
+		{
+			if(lowcost[i]!=0)
+			{
+				if(graph[minid][i]<INF&&graph[minid][i]<lowcost[i])
+				{
+					lowcost[i]=graph[minid][i];
+				}
+			}
+		}
+	}
+	
+}
+int main()
+{
+	cin>>n>>m;//n为边，m为顶点 
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=n;j++)
+		{
+			if(i==j)
+			graph[i][j]=0;
+			else
+			graph[i][j]=INF; 
+		}
+	}
+	for(int i=1;i<=m;i++)
+	{
+		cin>>x1>>x2>>x3;
+		graph[x1][x2]=x3;
+		graph[x2][x1]=x3;
+	}
+	int st;
+	cin>>st;
+	prim(n,st);
+	cout<<sum;
+	return 0;
+}
