@@ -1,0 +1,64 @@
+#include<iostream>
+#define INF 1e7
+using namespace std;
+int map[101][101],dist[101],flag[101];
+int n,m,u,v,w,q;
+int main()
+{
+	cin>>n>>m;
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=n;j++)
+		{
+			if(i==j)
+			map[i][j]=0;
+			else
+			map[i][j]=INF; 	
+		}
+	}
+	for(int i=0;i<m;i++)
+	{
+		cin>>u>>v>>w;
+		map[u][v]=w;
+	}
+	int q;
+	cin>>q;//n2为源点 
+	for(int i=1;i<=n;i++)
+	{
+		dist[i]=map[q][i];
+		flag[i]=0;
+	}
+	dist[q]=0;
+	flag[q]=1;
+	while(1)
+	{
+		int temp=INF,t=q;//g,k中间变量。
+		for(int j=1;j<=n;j++)
+		{
+			if(flag[j]==0&&dist[j]<temp)
+			{
+				temp=dist[j];
+				t=j;
+			}
+		}
+		if(t==q)
+		break;
+		flag[t]=1;
+		for(int j=1;j<=n;j++)
+		{
+				if(flag[j]==0&&map[t][j]<INF)
+				{
+					if(dist[j]>map[t][j]+dist[t])
+					{
+						dist[j]=dist[t]+map[t][j];
+					}
+				}
+			
+		}
+	}
+	for(int i=1;i<=n;i++)
+	{
+		cout<<dist[i]<<endl;
+	}
+	return 0;
+}
