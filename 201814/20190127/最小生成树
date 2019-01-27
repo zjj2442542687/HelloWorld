@@ -1,0 +1,43 @@
+#include<stdio.h>
+#define INF 100000
+int n,m,w,v,p,t;//点数,边数,节点,节点,边值,源点 
+int a[100][100],d[100],s[100];
+int min=0;
+void fun(int p){
+	for(int i=1;i<=n;i++){
+		d[i]=a[p][i];
+		s[i]=0;
+	}
+	for(int i=1;i<n;i++){
+		int temp=INF,k=p;
+		for(int j=1;j<=n;j++){
+			if(s[j]==0&&temp>d[j]){
+				temp=d[j];
+				k=j;
+			}
+		}
+		min+=temp;
+		s[k]=1;
+		for(int j=1;j<=n;j++){
+			if(s[j]==0&&d[j]>a[k][j]){
+				d[j]=a[k][j];
+			}
+		}
+	}
+	printf("%d",min);
+}
+int main(){
+	scanf("%d%d",&n,&m);//点数,边数 
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+			a[i][j]=INF;
+		}
+	}
+	for(int i=1;i<=m;i++){
+		scanf("%d%d%d",&w,&v,&p);//节点,节点,边值 
+		a[w][v]=a[v][w]=p;
+	}
+	scanf("%d",&t);//源点 
+	fun(t);
+	return 0;
+}
