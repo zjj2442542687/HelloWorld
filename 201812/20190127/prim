@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class Main {
+	public static int[][] pr;
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		int n = sr.nextInt();
+		int m = sr.nextInt();
+		pr = new int[n + 1][n + 1];
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= n; j++)
+				pr[i][j] = Integer.MAX_VALUE;
+			pr[i][i] = 0;
+		}
+		while (m-- > 0) {
+			int x = sr.nextInt();
+			int y = sr.nextInt();
+			int z = sr.nextInt();
+			pr[x][y] = z;
+			pr[y][x] = z;
+		}
+
+		sr.close();
+		prim();
+	}
+
+	public static void prim() {
+		int[] weights = new int[pr.length]; // 顶点间边的权值
+		for (int i = 1; i < pr[0].length; i++)
+			weights[i] = pr[1][i];
+		weights[1] = 0;
+		int sum = 0;
+		int count = 1;
+		while (count < pr.length - 1) {
+			int min = Integer.MAX_VALUE;
+			int k = 0;
+			for (int i = 1; i < pr.length; i++)
+				if (weights[i] != 0 && weights[i] < min) {
+					min = weights[i];
+					k = i;
+				}
+			sum += min;
+			weights[k] = 0;
+			count++;
+			for (int i = 1; i < pr.length; i++) {
+				if (pr[k][i] != 0 && pr[k][i] < weights[i])
+					weights[i] = pr[k][i];
+			}
+		}
+		System.out.println(sum);
+	}
+
+}
