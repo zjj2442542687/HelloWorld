@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n;
+	cin>>n;
+	long long N,M;
+	while(n--)
+	{
+		cin>>N>>M;
+		if(M>=N)
+		{
+			cout<<"Win"<<endl;
+		}
+		else
+		{
+			if(N%(M+1)==0)
+			cout<<"Lose"<<endl;
+			else
+			cout<<"Win"<<endl;
+		}
+	}
+	return 0; 
+ } 
