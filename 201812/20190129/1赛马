@@ -16,17 +16,24 @@ public class Main {
 			Arrays.sort(king);
 			Arrays.sort(tian);
 			int sum = -200 * n;
+			int count = 0;
+			int last = 0;
 			for (int i = 0, j = 0; i < n; i++, j++) {
 				while (j < n && tian[j] < king[i])
 					j++;
 				if (j == n)
 					break;
-				if (tian[j] == king[i])
+				if (tian[j] == king[i]) {
 					sum += 200;
-				else
+					if (last != king[i])
+						count++;
+					last = king[i];
+				} else
 					sum += 400;
 
 			}
+			if (count > 1)
+				sum += (count - 1) * 200;
 			System.out.println(sum);
 
 		}
