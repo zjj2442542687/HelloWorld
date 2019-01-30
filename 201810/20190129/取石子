@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner lnt = new Scanner(System.in);
+		int n=lnt.nextInt();
+		for(int i=0;i<n;i++) {
+			int t=lnt.nextInt();
+			int m=lnt.nextInt();
+			if(t%(m+1)==0) System.out.println("lose");
+			else System.out.println("win");
+		}
+	}
+
+}

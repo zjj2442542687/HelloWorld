@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner lnt = new Scanner(System.in);
+		int n = lnt.nextInt();
+		int m = lnt.nextInt();
+		int[][] a = new int[n + 1][n + 1];
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= n; j++) {
+				a[i][j] = Integer.MAX_VALUE;
+			}
+			a[i][i] = 0;
+		}
+		for (int i = 0; i < m; i++) {
+			int x = lnt.nextInt();
+			int y = lnt.nextInt();
+			int z = lnt.nextInt();
+			a[x][y] = z;
+			a[y][x] = z;
+		}
+		int[] b = new int[n + 1];
+		int sum = 0;
+		for (int i = 1; i <= n; i++) {
+			b[i] = a[1][i];
+		}
+		for (int i = 1; i < n; i++) {
+			int min = Integer.MAX_VALUE, k = 0;
+			for (int j = 1; j <= n; j++) {
+				if (min > b[j] && b[j] != 0) {
+					min = b[j];
+					k = j;
+				}
+			}
+			sum += min;
+			b[k] = 0;
+			for (int j = 1; j <= n; j++) {
+				if (a[k][j] != 0 && a[k][j] < b[j]) {
+					b[j] = a[k][j];
+				}
+			}
+		}
+		System.out.println(sum);
+	}
+}

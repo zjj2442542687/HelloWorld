@@ -1,0 +1,69 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+         Scanner lnt=new Scanner(System.in);
+         int n=lnt.nextInt();
+         int m=lnt.nextInt();
+         ArrayList<nan> []a=new ArrayList [n+1];
+         for(int i=0;i<=n;i++) {
+        	 a[i]=new ArrayList<nan>();    
+         }
+         for(int i=0;i<m;i++) {
+        	 int x=lnt.nextInt();                     
+        	 int y=lnt.nextInt();           
+        	 int z=lnt.nextInt();           
+        	 a[x].add(new nan(y,z));          
+         }
+         int head=lnt.nextInt();
+         int []results=new int[n+1];
+         boolean []judge=new boolean[n+1];
+         ArrayList<nan> list=new ArrayList<>();
+         for(int i=0;i<n;i++) {
+        	 results[i]=Integer.MAX_VALUE; 
+         }
+        for(int i=0;i<a[head].size();i++) {
+        	list.add(a[head].get(i));
+        }
+        Collections.sort(list,new Comparator<nan>() {
+
+			public int compare(nan o1, nan o2) {
+				return o1.juli-o2.juli;
+			}
+		});
+        while(list.size()>0) {
+        	nan t=list.get(0);
+        	list.remove(0);
+        	if(results[t.next]>t.juli) results[t.next]=t.juli;
+        	if(!judge[t.next]) {
+        		for (nan tmp : a[t.next]) {
+                    list.add(new nan(tmp.next, tmp.juli + t.juli));
+            }
+        		Collections.sort(list,new Comparator<nan>() {
+
+        			public int compare(nan o1, nan o2) {
+        				return o1.juli-o2.juli;
+        			}
+        		});
+        		judge[t.next]=true; 	
+        }
+	}  
+   for(int i=1;i<results.length;i++) {
+	   System.out.print(results[i]+" ");
+   }
+}
+}
+ class nan{
+	int next;
+	int juli;
+	public nan(int next, int juli) {
+		super();
+		this.next = next;
+		this.juli = juli;
+	}
+	
+}
