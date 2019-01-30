@@ -1,0 +1,46 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		int n = sr.nextInt();
+		int[] num = new int[n];
+		for (int i = 0; i < n; i++)
+			num[i] = sr.nextInt();
+		sr.close();
+		Sort(num);
+		for (int i = 0; i < n; i++)
+			System.out.print(num[i] + " ");
+
+	}
+
+	public static void Sort(int[] num) {
+		int middle = num.length / 2;
+		if (num.length <= 1)
+			return;
+		int[] left = Arrays.copyOfRange(num, 0, middle);
+		int[] reght = Arrays.copyOfRange(num, middle, num.length);
+		Sort(left);
+		Sort(reght);
+		Merge(num, left, reght);
+
+	}
+
+	public static void Merge(int[] num, int[] left, int[] reght) {
+		int i = 0, j = 0, k = 0;
+		while (i < left.length && j < reght.length) {
+			if (left[i] < reght[j])
+				num[k++] = left[i++];
+			else
+				num[k++] = reght[j++];
+
+		}
+		while (i < left.length)
+			num[k++] = left[i++];
+		while (j < reght.length)
+			num[k++] = reght[j++];
+
+	}
+}
