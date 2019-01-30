@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		int n = sr.nextInt();
+		while (n-- > 0) {
+			int a = sr.nextInt();
+			int b = sr.nextInt();
+			if (a % (b + 1) == 0)
+				System.out.println("Lose");
+			else
+				System.out.println("Win");
+		}
+		sr.close();
+	}
+
+}
