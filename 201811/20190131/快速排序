@@ -1,0 +1,59 @@
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		
+		int n = sr.nextInt();
+		int [] nums = new int[n];
+		
+		for(int i = 0; i < n; i++)
+			nums[i] = sr.nextInt();
+		
+		quickSort(nums,0,n - 1);
+		
+		for(int i = 0; i < n; i++)
+			System.out.print(nums[i] + " ");
+		sr.close();
+	}
+	
+	public static void quickSort(int [] nums,int start,int end){
+		if(start < end){
+			//基准数
+			//以基准数为准，比他大的放右边，小的左边
+			int temp = nums[start];
+			int low = start;
+			int hight = end;
+
+			//实现大的放右边，小的放左边
+			while(low < hight){
+				while(low < hight && nums[hight] >= temp)
+					hight--;
+				//小于放左边
+				nums[low] = nums[hight];
+				
+				while(low < hight && nums[low] <= temp)
+					low++;
+				//大于放最右边
+				nums[hight] = nums[low];
+				
+			}
+			
+			//实现划分后比如3 2 1 变成
+			//1 2 1 
+			//height 和low 都会指向最后一个1（下标2）
+			//把基数准放入下标2中完成交换
+			nums[low] = temp;
+			
+			//分成两部分继续拆分
+			//如1 2 3
+			//再拆的话，low 指向下标2 ，end = low ，
+			//low = start ,low 指向 0在while中low hight不动,low = 0,start = 0
+			//再拆时start == end递归结束
+			quickSort(nums,start,low);
+			quickSort(nums,low + 1, end);
+		}
+	}
+}
