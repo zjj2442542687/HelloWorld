@@ -1,0 +1,80 @@
+package Date_Structure2;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+/*
+ * 归并排序
+ * 输入：
+ * 8
+ * 1 3 5 2 4 6 8 10
+ * 
+ * 输出：
+ * 1 2 3 4 5 6 8 10
+ * */
+public class MergeSort {
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		
+		int n = sr.nextInt();
+		int [] nums = new int[n];
+		
+		for(int i = 0; i < nums.length; i++)
+			nums[i] = sr.nextInt();
+		
+		fun(nums,0,nums.length - 1);
+		
+		System.out.println(Arrays.toString(nums));
+		
+		sr.close();
+	}
+	
+	//拆分操作
+	public static void fun(int [] nums, int low, int hight){
+		if(low < hight){
+			int middle = (low + hight) / 2;
+			
+			fun(nums,low,middle);
+			fun(nums,middle + 1, hight);
+			
+			merge(nums,low,middle,hight);
+		}
+	}
+	
+	//合并操作
+	public static void merge(int [] nums, int low, int middle, int hight){
+		//合并2 1时
+		//temp 储存2 1 合并后的结果
+		//2 1 分别的下标为0 1 
+		//（0 + 1）/ 2 = 1 所以temp 初使化的长度要加一
+		int [] temp = new int[low + hight + 1];
+		int idex = 0,i,j;
+		
+		for(i = low, j = middle + 1; i <= middle && j <= hight;idex++){
+			if(nums[i] <= nums[j]){
+				temp[idex] = nums[i];
+				i++;
+			}else{
+				temp[idex] = nums[j];
+				j++;
+			}
+		}
+		
+		while(i <= middle){
+			temp[idex] = nums[i];
+			i++;
+			idex++;
+		}
+		
+		while(j <= hight){
+			temp[idex] = nums[j];
+			j++;
+			idex++;
+		}
+		
+		//把temp中的值，按在nums中对应的 下标合并到一起
+		for(i = low,j = 0; i <= hight; i++,j++){
+			nums[i] = temp[j];
+		}
+	}
+}
