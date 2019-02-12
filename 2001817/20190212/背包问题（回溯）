@@ -1,0 +1,52 @@
+#include<stdio.h>
+int n,c,max;//物品的个数，背包的容量，最大价值
+int p[100],w[100],x[100],bestx[100];//物品的价值，物品的重量，x[i]暂存物品的选中情况，物品选中情况 
+void fun(int i,int cp,int cw)//cw当前包内物品重量，cp当前包内物品价值
+{ 
+    int j;
+    if(i>n)
+    {
+        if(cp>max)
+        {
+            max=cp;
+            for(i=0;i<=n;i++) bestx[i]=x[i];
+        }
+    }
+    else 
+        for(j=0;j<=1;j++)  
+        {
+            x[i]=j;
+            if(cw+x[i]*w[i]<=c)  
+            {
+                cw+=w[i]*x[i];
+                cp+=p[i]*x[i];
+                fun(i+1,cp,cw);
+                cw-=w[i]*x[i];
+                cp-=p[i]*x[i];
+            }
+        }
+}
+int main()
+{int h;//h表示有多少组测试数组 
+scanf("%d",&h);
+   while(h--){
+    int i;
+    max=0; 
+    printf("请输入背包最大容量,物品个数表:");
+    scanf("%d%d",&c,&n);
+    printf("请依次输入物品的重量:");
+    for(i=1;i<=n;i++) 
+        scanf("%d",&w[i]);
+    printf("请依次输入物品的价值:");
+    for(i=1;i<=n;i++) 
+        scanf("%d",&p[i]);
+    fun(1,0,0);
+    printf("最大价值为:");
+    printf("%d\n",max);
+    printf("被选中的物品依次是(0表示未选中，1表示选中):");
+    for(i=1;i<=n;i++) 
+        printf("%d ",bestx[i]);
+    printf("\n");
+	}
+    return 0;
+}
