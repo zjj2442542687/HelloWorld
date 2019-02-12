@@ -1,0 +1,38 @@
+#include<stdio.h>
+int n,m;
+int a[100];
+int b[100];
+int max=0,t=0,x=0;
+void fun(int k)
+{
+	if(k>n)
+	{
+	if(max==0||max<x)
+	{
+		max=x;
+	}	
+	}
+	else
+	{
+		if(t+a[k]<=m)
+		{
+			t+=a[k];
+			x+=b[k];
+			fun(k+1);
+			x-=b[k];
+			t-=a[k];
+		}
+            fun(k+1);
+	}
+}
+int main()
+{
+	scanf("%d%d",&n,&m);
+	for(int i=0;i<n;i++)
+	{
+		scanf("%d%d",&a[i],&b[i]);
+	}
+	fun(0);
+	printf("%d",max);
+	return 0;
+}
