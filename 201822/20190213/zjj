@@ -1,0 +1,90 @@
+package hanjiazhoye;
+
+import java.util.Scanner;
+
+public class a20190213 {
+
+	static int c; //背包容量
+
+	static int n; //对象数目
+
+	static int[] w; //对象重量数组
+
+	static int[] p; //对象收益数组
+
+	static int cw; //当前背包重量
+
+	static int cp; //当前背包价值
+
+	static int bestp;//迄今最大的收益
+
+	static int[] X; //记录在书中的移动路径
+
+	public static void main(String args[]) {
+
+		Scanner sr=new Scanner(System.in );
+		
+		c=sr.nextInt();
+
+		n=sr.nextInt();
+
+		w=new int[20];
+
+		p=new int[20];
+		
+		
+		X=new int[n];
+
+		for(int i=0;i<n;i++){
+			
+			w[i]=sr.nextInt();
+			
+			p[i]=sr.nextInt();
+			
+		}
+		
+		getBest(0);
+
+		System.out.println(bestp);
+
+	}
+
+	public static void getBest(int i){
+
+		if(i>=n){
+
+			if(cp>bestp){
+
+				bestp=cp;
+
+			}
+
+			return;
+
+		}
+
+		if(cw+w[i]<=c){
+
+			X[i]=1;
+
+			cw+=w[i];
+
+			cp+=p[i];
+
+			getBest(i+1);
+
+			cw-=w[i];
+
+			cp-=p[i];
+
+		}
+
+		X[i]=0;
+
+		getBest(i+1);
+
+	}
+
+}
+
+
