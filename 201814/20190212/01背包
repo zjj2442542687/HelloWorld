@@ -1,0 +1,26 @@
+#include<stdio.h>
+int n,m,w[100],v[100];
+int sum,num,maxv=0;
+int fun(int k){
+	for(int i=k;i<n;i++){
+		if(sum+w[i]<=m){
+			sum+=w[i];
+			num+=v[i];
+			if(num>maxv){
+				maxv=num;
+			}
+			fun(i+1);
+			sum-=w[i];
+			num-=v[i];
+		}
+	}
+}
+int main(){
+	scanf("%d%d",&n,&m);
+	for(int i=0;i<n;i++){
+		scanf("%d%d",&w[i],&v[i]);
+	}
+	fun(0);
+	printf("%d",maxv);
+	return 0;
+}
