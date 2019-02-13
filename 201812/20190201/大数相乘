@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		char[] a = sr.next().toCharArray();
+		char[] b = sr.next().toCharArray();
+		sr.close();
+		boolean flag = false;
+		if ((a[0] == '-' && b[0] != '-') || (b[0] == '-' && a[0] != '-'))
+			flag = true;
+
+		int[] x = new int[a.length];
+		int[] result = new int[a.length + b.length];
+		for (int i = 0; i < x.length; i++) {
+			if (a[x.length - 1 - i] == '-')
+				x[i] = 0;
+			else
+				x[i] = a[x.length - 1 - i] - 48;
+		}
+		int z;
+		if (b[0] != '-')
+			z = 0;
+		else
+			z = 1;
+		for (int i = b.length - 1; i >= z; i--) {
+			int[] t = new int[a.length + b.length];
+			int tmp = b[i] - 48;
+			int k = b.length - i - 1;
+			int jw = 0;// 进位
+			for (int j = 0; j < x.length; j++, k++) {
+				int s = x[j] * tmp + jw;
+				t[k] = s % 10;
+				jw = s / 10;
+				if (j == x.length - 1)
+					t[k + 1] = jw;
+			}
+			for (int j = result.length - 1; j >= 0; j--) {
+				if (t[j] + result[j] > 9)
+					result[j + 1]++;
+				result[j] = (result[j] + t[j]) % 10;
+			}
+		}
+		StringBuffer results = new StringBuffer();
+		if (flag)
+			results.append('-');
+		boolean is = false;
+		for (int i = result.length - 1; i >= 0; i--) {
+			if (!is && result[i] != 0)
+				is = true;
+			if (is)
+				results.append(result[i]);
+		}
+		if (!is)
+			System.out.println(0);
+		else
+			System.out.println(results);
+	}
+
+}

@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Main {
+	public static int result = Integer.MIN_VALUE;
+	public static int[] w;// 重量
+	public static int[] v;// 价值
+	public static int m;// 总重量
+	public static int cw = 0;// 当前重量
+	public static int cv = 0;// 当前价值
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		int n = sr.nextInt();
+		m = sr.nextInt();
+		w = new int[n];
+		v = new int[n];
+		for (int i = 0; i < n; i++) {
+			w[i] = sr.nextInt();
+			v[i] = sr.nextInt();
+		}
+		sr.close();
+		fun(0);
+		System.out.println(result);
+	}
+
+	public static void fun(int i) {
+		if (i >= w.length) {
+			if (cv > result)
+				result = cv;
+			return;
+		}
+		if (cw + w[i] <= m) {
+			cw += w[i];
+			cv += v[i];
+			fun(i + 1);
+			cw -= w[i];
+			cv -= v[i];
+		}
+		fun(i + 1);
+	}
+}
