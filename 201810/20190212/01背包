@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Main {
+	public static int result = Integer.MIN_VALUE;
+	public static int[] w;
+	public static int[] v;
+	public static int W;
+	public static int n;
+	public static int cw = 0;
+	public static int cv = 0;
+
+	public static void main(String[] args) {
+		Scanner lnt = new Scanner(System.in);
+		n = lnt.nextInt();
+		W = lnt.nextInt();
+		w = new int[n];
+		v = new int[n];
+		for (int i = 0; i < n; i++) {
+			w[i] = lnt.nextInt();
+			v[i] = lnt.nextInt();
+		}
+		nan(0);
+		System.out.println(result);
+	}
+
+	public static void nan(int i) {
+		if (i >= n) {
+			if (cv > result)
+				result = cv;
+			return;
+		}
+		if (cw + w[i] <= W) {
+			cw += w[i];
+			cv += v[i];
+			nan(i + 1);
+			cw -= w[i];
+			cv -= v[i];
+		}
+		nan(i + 1);
+	}
+}

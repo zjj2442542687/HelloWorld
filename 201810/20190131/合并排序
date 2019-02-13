@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+        int n;
+        Scanner lnt=new Scanner(System.in);
+        n=lnt.nextInt();
+        int []a=new int[n];
+        for(int i=0;i<n;i++) {
+        	a[i]=lnt.nextInt();
+        }
+        cf(a);
+        for(int i=0;i<n;i++) {
+        	System.out.println(a[i]);
+        } 
+	}
+  static void cf(int a[]) {
+	  int rigth[]=new int[a.length/2];
+	  int left[]=new int[a.length-a.length/2];
+	  if(a.length>1) {
+	  for(int i=0;i<a.length/2;i++) {
+		  rigth[i]=a[i];
+	  }
+	  for(int i=a.length/2,j=0;i<a.length;i++) {
+		  left[j++]=a[i];
+	  }
+	  cf(rigth);
+	  cf(left);
+	  hb(rigth,left,a);
+	 }
+  }
+  static void hb(int a[],int b[],int c[]){
+	  int al=0,bl=0,i=0;
+	  while(al<a.length&&bl<b.length) {
+		  if(a[al]<b[bl]) {
+			  c[i]=a[al];
+			  al++;
+			  i++;
+		  }else {
+			  c[i]=b[bl];
+			  bl++;
+			  i++;
+		  }
+	  }
+		  while(al<a.length) {
+			  c[i++]=a[al++];
+		  }
+		  while(bl<b.length) {
+			  c[i++]=b[bl++];
+		  }
+  }
+}
