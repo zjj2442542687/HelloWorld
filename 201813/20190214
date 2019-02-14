@@ -1,0 +1,38 @@
+#include<stdio.h>
+int a[100][100],q[100],p[100],t[100],n,s=0;
+void f(int *p, int ts , int tn){
+	int p1[100]={0};
+	if(ts==0){
+		if(tn>s){
+			s=tn;
+			for(int i=0 ;i < tn ; i++)
+			t[i]=q[i];
+			}
+			return ;
+		}
+		for(int i =0 ; i < ts ; i ++){
+			if(tn+(ts-i)<=s)return ;
+			q[tn]=p[i];
+			int k=0;
+			for(int j=i+1;j< ts;j++)if(a[p[i]][p[j]])p1[k++]=p[j];
+			f(p1,k,tn+1);
+		}
+	}
+int main(){
+	int m, tt[100];
+	scanf("%d%d",&n,&m);
+	for(int i = 0 ;i < m ;i++){
+		int k,l;
+		scanf("%d%d",&k,&l);
+		a[l][k]=a[k][l]=1;
+	}
+		for(int i=n; i>0;i--)
+		{
+			q[0]=i;
+			int k=0;
+			for(int j=i+1;j<=n;j++)if(a[i][j])tt[k++]=j;
+			f(tt,k,1);
+		}
+		for(int i = 0 ; i <s ; i++)
+		printf("%d  ",t[i]);
+	}
