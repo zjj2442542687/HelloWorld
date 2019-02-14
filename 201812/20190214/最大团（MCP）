@@ -24,7 +24,7 @@ public class Main {
 		sr.close();
 		dfs(1);
 
-		System.out.println(better);
+		//System.out.println(better);
 		for (int i = 1; i <= n; i++)
 			if (b[i])
 				System.out.print(i + " ");
