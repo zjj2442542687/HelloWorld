@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class Main {
+	public static int n;
+	public static boolean[][] a;
+	public static int count;
+	public static int better;
+	public static boolean[] c;
+	public static boolean[] b;
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		n = sr.nextInt();
+		int m = sr.nextInt();
+		a = new boolean[n + 1][n + 1];
+		b = new boolean[n + 1];
+		c = new boolean[n + 1];
+		better = count = 0;
+		for (int i = 0; i < m; i++) {
+			int x = sr.nextInt();
+			int y = sr.nextInt();
+			a[x][y] = a[y][x] = true;
+		}
+		sr.close();
+		dfs(1);
+
+		System.out.println(better);
+		for (int i = 1; i <= n; i++)
+			if (b[i])
+				System.out.print(i + " ");
+		System.out.println();
+
+	}
+
+	private static void dfs(int t) {
+		if (t > n) {
+			if (count > better) {
+				better = count;
+				for (int i = 1; i <= n; i++)
+					b[i] = c[i];
+			}
+			return;
+		}
+		if (judge(t)) {
+			count++;
+			c[t] = true;
+			dfs(t + 1);
+			count--;
+			c[t] = false;
+		}
+		dfs(t + 1);
+
+	}
+
+	private static boolean judge(int t) {
+
+		for (int i = 1; i <= n; i++)
+			if (c[i] && !a[t][i])
+				return false;
+
+		return true;
+	}
+
+}
