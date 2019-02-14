@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class Main {
+   public static  boolean [][]a;
+   public static  boolean []temp;
+   public static  boolean []result;
+   public static  int count=0;
+   public static  int best;
+   public static  int n;
+	public static void main(String[] args) {
+         Scanner lnt=new Scanner(System.in);
+         n=lnt.nextInt();
+         temp=new boolean[n+1];
+         result=new boolean[n+1];
+        int  m=lnt.nextInt();
+         a=new boolean[n+1][n+1];
+        for(int i=0;i<m;i++) {
+        	int x=lnt.nextInt();
+        	int y=lnt.nextInt();
+        	a[x][y]=true;
+        	a[y][x]=true;
+        }
+        dfs(1);
+        for(int i=1;i<=n;i++) {
+        	if(result[i]) System.out.print(i+" ");
+        }
+	}
+	public static void dfs(int t) { 
+		if(t>n) {
+			if(best<count) {
+				best=count;
+				for(int i=1;i<=n;i++) {
+					result[i]=temp[i];
+				}
+			}
+			return;
+		}
+		if(friendship(t)) {
+			temp[t]=true;
+			count++;
+			dfs(t+1);
+			count--;
+			temp[t]=false;
+		}
+		dfs(t+1);
+	}
+	public static boolean friendship(int my) {
+		for(int i=1;i<=n;i++) {
+			if(temp[i]&&!a[i][my]) 
+				return false;
+		}
+		return true;
+	}
+}
