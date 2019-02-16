@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class Main {
+	public static boolean[][] map;
+	public static int[] result;
+	public static int color;
+
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		int country = sr.nextInt();// 国家数
+		map = new boolean[country + 1][country + 1];
+		result = new int[country + 1];
+		color = sr.nextInt();// 颜色数
+		int n = sr.nextInt();
+		while (n-- > 0) {
+			int x = sr.nextInt();
+			int y = sr.nextInt();
+			map[x][y] = true;
+			map[y][x] = true;
+		}
+		sr.close();
+		dfs(1);
+
+	}
+
+	private static void dfs(int k) {
+		if (k >= result.length) {
+			for (int i = 1; i < result.length; i++)
+				System.out.print(result[i] + " ");
+			System.out.println();
+			return;
+		}
+		for (int i = 1; i <= color; i++) {
+			if (judge(k, i)) {
+				result[k] = i;
+				dfs(k + 1);
+//				result[k] = 0;
+			}
+
+		}
+
+	}
+
+	private static boolean judge(int k, int t) {
+		for (int i = 1; i < k; i++)
+			if (result[i] == t && map[i][k])
+				return false;
+		return true;
+
+	}
+
+}
