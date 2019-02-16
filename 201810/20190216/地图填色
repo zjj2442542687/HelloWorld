@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class Main {
+	public static int country, color;
+	public static int con[];
+	public static boolean a[][];
+
+	public static void main(String[] args)  {
+		Scanner lnt = new Scanner(System.in);
+		country = lnt.nextInt();
+		color = lnt.nextInt();
+		int m = lnt.nextInt();
+		con = new int[country+1];
+		a = new boolean[country+1][country+1];
+		for (int i = 0; i < m; i++) {
+			int x = lnt.nextInt();
+			int y = lnt.nextInt();
+			a[x][y] = true;
+			a[y][x] = true;
+		}
+		fun(1);
+	}
+	public static void fun(int t) {
+         if(t>country) {
+        	 for(int i=1;i<con.length;i++) {
+        		 System.out.print(con[i]+" ");
+        	 }
+        	 System.out.println();
+        	 return;
+         }
+         for(int i=1;i<=color;i++) {
+         if(col(t,i)) {
+        	 con[t]=i;
+        	 fun(t+1);
+          }
+         }
+	}
+	public static boolean col(int x,int y) {
+      		for(int i=1;i<=x;i++) {
+      			if(con[i]==y&&a[i][x]) {
+      				return false;
+      			}
+      		}
+      		return true;
+	}
+}
