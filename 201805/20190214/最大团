@@ -1,0 +1,62 @@
+#include<iostream>
+using namespace std;
+int n,m,x1,x2;
+int cn,bestn;
+int x[10001],bestx[10001];
+int graph[10001][10001];
+void dfs(int i)
+{
+	if(i>n)
+	{
+		if(cn>bestn)
+		{
+			bestn=cn;
+			for(int j=1;j<=n;j++)
+			{
+				bestx[j]=x[j];
+			}
+		}
+	}
+	int m=1;
+	for(int j=1;j<i;j++)
+	{
+		if(x[j]&&graph[j][i]==0)
+		{
+		 m=0;
+		 break;	
+		}
+	}
+	if(m)
+	{
+		x[i]=1;
+		cn++;
+		dfs(i+1);
+		x[i]=0;
+		cn--;
+	}
+	if(cn+n-i>=bestn)
+	{
+		x[i]=0;
+		dfs(i+1);
+	}
+}
+int main(){
+    cin >> n >>m;
+    for(int i=1; i<=n; i++){
+        for(int j=1; j<=n; j++){
+            graph[i][j] = 0;
+        }
+    }
+    for(int k=1; k<=m; k++){
+        cin>>x1>>x2;
+        graph[x1][x2]=1; 
+        graph[x2][x1]=1; 
+    } 
+    dfs(1);
+    for(int j=1;j<=n;j++)
+    {
+    	if(bestx[j]==1)
+    	cout<<j<<" ";
+	}
+    return 0;
+} 

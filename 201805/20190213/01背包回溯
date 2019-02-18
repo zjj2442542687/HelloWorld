@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+int n,maxcap,maxval;//物品的个数，背包的最大容量，最大价值
+const int N=1000;
+int val[N],w[N],x[N],bestx[N];//物品的价值，物品的重量，x[i]暂存物品的选中情况,物品的选中情况
+void dfs(int i,int cw ,int ch)//cw背包当前容量 ch背包当前最大价值 
+{
+	if(i>n)
+	{
+		if(ch>maxval)
+		{
+			maxval=ch;
+		}
+		for(int j=1;j<=n;j++)
+		{
+			bestx[j]=x[j];
+		}
+	}
+	else
+	{
+		for(int j=0;j<=1;j++)
+		{
+			x[i]=j;
+			if(cw+w[i]*x[i]<=maxcap)
+			{
+				cw+=w[i]*x[i];
+				ch+=val[i]*x[i];
+				dfs(i+1,cw,ch);
+				cw-=w[i]*x[i];
+				ch-=val[i]*x[i];		
+			}
+		 } 
+	}	
+} 
+int main()
+{
+	cout<<"背包最大容量"<<endl; 
+	cin>>maxcap;
+	cout<<"物品的个数"<<endl;
+	cin>>n;
+	cout<<"物品的价值"<<endl;
+	for(int i=1;i<=n;i++)
+	{
+		cin>>val[i]; 
+	} 
+	cout<<"物品的重量"<<endl;
+	for(int i=1;i<=n;i++)
+	{
+		cin>>w[i];
+	} 
+	dfs(1,0,0);
+	cout<<"物品最大价值"<<endl;
+	cout<<maxval<<endl;
+	cout<<"选择物品的编号"<<endl;
+	for(int j=1;j<=n;j++)
+	{
+		if(bestx[j]==1)
+		cout<<j<<" ";
+	 } 
+	return 0;
+}
