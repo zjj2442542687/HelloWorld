@@ -1,0 +1,99 @@
+package Lanqiao2;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+/*
+ * 问题描述：
+给定N个物品,每个物品有一个重量W和一个价值V.你有一个能装M重量的背包.问怎么装使得所装价值最大.每个物品只有一个.
+输入格式
+　　输入的第一行包含两个整数n, m，分别表示物品的个数和背包能装重量。
+　　以后N行每行两个数Wi和Vi,表示物品的重量和价值
+输出格式
+　　输出1行，包含一个整数，表示最大价值。
+样例输入
+3 5
+2 3
+3 5
+4 7
+样例输出
+8
+数据规模和约定
+　　1<=N<=200,M<=5000.
+ * */
+public class P1 {
+	//最优解
+	public static int best;
+	//public static int [] path;
+	public static int [] cr;
+	public static int [] cw;
+	public static int [] xi;
+	public static int n,m;
+	public static int pr,pw;
+	
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		
+		n = sr.nextInt();
+		m = sr.nextInt();
+		cr = new int[n];
+		cw = new int[n];
+		xi = new int[n];
+		//path = new int[n];
+		
+		for(int i = 0; i < n; i++){
+			cw[i] = sr.nextInt();
+			cr[i] = sr.nextInt();
+		}
+		
+		best = pr = pw = 0;
+		fun(0);
+		
+		System.out.println(best);
+		//System.out.println(Arrays.toString(path));
+		sr.close();
+	}
+	public static void fun(int i){
+		if(i >= n){
+			best = pr;
+			
+			/*for(int j = 0; j < n; j++)
+				path[j] = xi[j];*/
+			return ;
+		}
+		
+		//左分支
+		if(cw[i] + pw <= m){
+			xi[i] = 1;
+			pw += cw[i];
+			pr += cr[i];
+			
+			fun(i + 1);
+			
+			pw -= cw[i];
+			pr -= cr[i];
+			
+		}
+		
+		//右分支不取，xi[i]为0
+		if(bound(i + 1) > best){
+			xi[i] = 0;
+			fun(i + 1);
+		}
+	}
+	
+	//计算上界值
+	//上界值用来剪枝和求出最优解，如果，bound计算出来的值小于算出的最优解那么就不需要再计算了
+  //bound 求出剩下未装入背包的价值+己放入的背包的价值
+	public static int bound(int i){
+		int price = 0;
+		
+		while(i < n){
+			price += cr[i];
+			
+			i++;
+		}
+		
+		return price + pr;
+	}
+}
