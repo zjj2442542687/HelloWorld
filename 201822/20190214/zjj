@@ -1,0 +1,113 @@
+#include<iostream>
+
+#include<cstring>
+
+#include<vector>
+
+using namespace std;
+
+vector<int>v;
+
+int map[15][15];
+
+int tmp[15];//1代表当前下标节点在团中 
+
+int n,m;//定点从一开始编号 
+
+int ans;
+
+void dfs(int step,int cnt)
+
+{
+
+	if(step>n)
+
+	{
+
+		ans=cnt;
+
+		v.clear();
+
+		for(int i=1;i<=n;i++)
+
+		{
+
+			if(tmp[i])v.push_back(i);
+
+		}
+
+		return;
+
+	}
+
+	int flag=1;
+
+	for(int i=1;i<step;i++)
+
+	{
+
+		if(tmp[i]==1&&map[step][i]==0){
+
+		flag=0;break;
+
+		}
+
+	}
+
+	if(flag)
+
+	{
+
+		tmp[step]=1;
+
+		dfs(step+1,cnt+1); 
+
+		tmp[step]=0;//别忘记回溯 
+
+	 } 
+
+	 
+
+	 if(cnt+(n-step)>ans){
+
+	 	tmp[step]=0;
+
+	 	dfs(step+1,cnt);
+
+	 }
+
+}
+
+int main()
+
+{
+
+	while(cin>>n>>m)
+
+	{
+
+		v.clear();ans=0;memset(map,0,sizeof(map));
+
+		memset(tmp,0,sizeof(tmp));
+
+		for(int i=1;i<=m;i++)
+
+		{
+
+			int x,y;cin>>x>>y;
+
+			map[x][y]=map[y][x]=1;
+
+		}
+
+		dfs(1,0);	
+
+		for(int i=0;i<v.size();i++)cout<<v[i]<<" ";cout<<endl; 
+
+	 } 
+
+	
+
+	return 0;
+
+} 
