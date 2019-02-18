@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Main {
+ public static int n;
+ public static boolean b[];//反对角线
+ public static boolean c[];//列
+ public static int result[];
+ public static boolean a[]; //对角线
+	public static void main(String[] args) {
+         Scanner lnt=new Scanner(System.in);
+          n=lnt.nextInt();
+          a=new boolean[2*n-1];
+          b=new boolean[2*n-1];
+          c=new boolean[n];
+          result=new int[n];
+          queen(0);
+	}
+    public static void queen(int m) {
+    	if(m>=n) {
+    		for(int i=0;i<n;i++) {
+    			System.out.print(result[i]+" ");
+    		}
+    		System.out.println();
+    		return;
+    	}
+    	for(int i=0;i<n;i++) {
+    		if(!a[m+i]&&!b[m-i+n-1]&&!c[i]) {
+    			a[m+i]=true;
+    			b[m-i+n-1]=true;
+    			c[i]=true;
+    		result[m]=i+1;
+    		  queen(m+1);
+    		  a[m+i]=false;
+  			b[m-i+n-1]=false;
+  			c[i]=false;
+    		}
+    	}
+    }
+}
