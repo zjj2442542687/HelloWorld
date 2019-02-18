@@ -29,8 +29,6 @@ public class Main {
 			}
 		} else {
 			count++;
-			if (count > 3)
-				return;
 			for (int i = 0; i < map.length; i++)
 				System.out.print(map[i] + " ");
 			System.out.println();
