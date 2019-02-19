@@ -1,0 +1,77 @@
+package jbsf100;
+
+import java.util.Scanner;
+
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+public class Bahuanghou {
+	static int n, sum = 0;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sr = new Scanner(System.in);
+		n = sr.nextInt();
+		int[][] chees = new int[n][n];
+		pai(0, 0, chees);
+		System.out.println(sum);
+		sr.close();
+	}
+
+	public static boolean jiancha(int hang, int lie, int[][] chees) {
+		for (int i = 0; i < n; i++) {
+			if (chees[hang][i] == 1)
+				return false;
+			if (chees[i][lie] == 1)
+				return false;
+		}
+		for (int i = 0; i < n; i++) {
+			if (hang + i >= n || lie + i >= n)
+				break;
+			if (chees[hang + i][lie + i] == 1)
+				return false;
+		}
+		for (int i = 0; i < n; i++) {
+			if (hang - i < 0 || lie - i < 0)
+				break;
+			if (chees[hang - i][lie - i] == 1)
+				return false;
+		}
+		for (int i = 0; i < n; i++) {
+			if (hang + i >= n || lie - i < 0)
+				break;
+			if (chees[hang + i][lie - i] == 1)
+				return false;
+		}
+		for (int i = 0; i < n; i++) {
+			if (hang - i < 0 || lie + i >= n)
+				break;
+			if (chees[hang - i][lie + i] == 1)
+				return false;
+		}
+		return true;
+	}
+
+	public static void pai(int hang, int lie, int[][] chees) {
+		int[][] chees2 = new int[n][n];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++)
+				chees2[i][j] = chees[i][j];
+		}
+		if (hang == n) {
+			System.out.println("---------------------------");
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < n; j++)
+					System.out.print(chees2[i][j]);
+				System.out.println();
+			}
+			sum++;
+		} else
+			for (int i = 0; i < n; i++) {
+				if (jiancha(hang, i, chees2)) {
+					chees2[hang][i] = 1;
+					pai(hang + 1, lie, chees2);
+					chees2[hang][i] = 0;
+				}
+			}
+	}
+}
