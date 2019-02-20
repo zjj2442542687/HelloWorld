@@ -5,7 +5,7 @@
 int p[100]={0},n,m,c;
 int pd(){
 	for(int i = 0 ;i < c ; i++)
-		 if(p[a[i].x]==p[a[i].y])return 0;
+		 if(p[a[i].x]==p[a[i].y]&&p[a[i].x]&&p[a[i].y])return 0;
 	return 1;
 }
 void f(int i){
@@ -19,8 +19,9 @@ void f(int i){
 	else {
 		for(int j=1;j<= m;j++){
 			p[i]=j;
-		f(i+1);
+			if(pd())f(i+1);
 		}
+		p[i]=0;
 	}
 }
 int main(){
@@ -28,5 +29,5 @@ int main(){
 	for(int i =0 ; i < c ;i++)
 		scanf("%d%d",&a[i].x,&a[i].y);
 	f(1);
-  return 0;
+	return 0;
 }
