@@ -1,0 +1,39 @@
+#include<stdio.h>
+int a[100][100],n;
+void fun(int i)
+    {   
+    	if(i==n){
+		for(int k=0;k<n;k++)
+		for(int l=0;l<n;l++)
+		if(a[k][l]==2){printf("%d",l+1);break;}
+		printf("\n");
+		} 
+		else{
+    	for(int x=0;x<n;x++)
+    	{
+    		if(a[i][x]==0) {
+    			if(i!=0) {
+    			int f=0;
+    			for(int j=i-1;j>=0;j--)
+    				if(a[j][x]==2)f=1;
+    			if(f==1)continue;
+    			for(int j=i-1,g=1;j>=0&&g+x<n;j--,g++)
+    				if(a[j][x+g]==2)f=1;
+    			if(f==1)continue;
+    			for(int j=i-1,g=x-1;j>=0&&g>=0;j--,g--)
+    				if(a[j][g]==2)f=1;
+    			if(f==1)continue;
+    			}
+    			a[i][x]=2;
+    			fun(i+1);
+    			a[i][x]=0;
+    			}
+    	}
+     }
+}
+int main() {
+    scanf("%d",&n);
+    fun(0);
+    return 0;
+    }
+
