@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Main {
+	public static int[] map;
+	public static boolean[] a, b, c;
+	public static int count = 0;
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int number = in.nextInt();
+		map = new int[number];
+		a = new boolean[number];
+		b = new boolean[number * 2 - 1];
+		c = new boolean[number * 2 - 1];
+		dfs(0);
+//		System.out.println(count);
+		in.close();
+	}
+
+	public static void dfs(int n) {
+		if (n < map.length) {
+			for (int i = 0; i < map.length; i++) {
+				if (!(a[i] || b[i + n] || c[map.length - 1 + i - n])) {
+					a[i] = b[i + n] = c[map.length - 1 + i - n] = true;
+					map[n] = i + 1;
+					dfs(n + 1);
+					a[i] = b[i + n] = c[map.length - 1 + i - n] = false;
+				}
+			}
+		} else {
+			count++;
+			for (int i = 0; i < map.length; i++)
+				System.out.print(map[i] + " ");
+			System.out.println();
+
+		}
+	}
+
+}
