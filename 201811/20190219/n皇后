@@ -1,0 +1,57 @@
+
+import java.util.Scanner;
+
+/*
+ * 在一个n*n的棋盘上有n个皇后，皇后的攻击范围为同一行，列以及斜线，如何放置着n个皇后使他们互相无法攻击呢
+例：
+输入
+4
+输出
+2 4 1 3（第一行第二个，第二行第四个，以此类推） 
+3 1 4 2
+ * */
+public class  Main {
+	//解
+	public static int [] bestx;
+	//n*n
+	public static int n;
+	public static void main(String[] args) {
+		Scanner sr = new Scanner(System.in);
+		
+		n = sr.nextInt();
+		bestx = new int[n];
+		
+		fun(0);
+		sr.close();
+	}
+	
+	//约束方法。xi 代表行，xj 代表列
+	//bestx[i]中存放第i行(第i个皇后的在经i行的第bestx[i]列)
+	//xj代表行，xi代表列
+	public static boolean isTrue(int xi,int xj){
+		for(int i = 0; i < xi; i++){
+			//不在同一列且不在斜线上
+			if(bestx[i] != xj && Math.abs(i - xi) != Math.abs(bestx[i] - xj))
+				continue;
+			else
+				return false;
+		}
+		
+		return true;
+	}
+	//搜索
+	public static void fun(int t){
+		if(t >= n){
+			for(int i = 0; i < bestx.length; i++)
+				System.out.print(bestx[i] + 1 + " ");
+			System.out.println();
+		}else{
+			for(int i = 0; i < n; i++){
+				bestx[t] = i;
+				//约束条件
+				if(isTrue(t,i) == true)
+					fun(t + 1);
+			}
+		}
+	}
+}
